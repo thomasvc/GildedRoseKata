@@ -47,7 +47,7 @@ internal class StandardGoodTests {
     @Test
     fun `The Quality of an item is never negative`() {
         val app = GildedRose(arrayOf(Item(standardGood, SELL_IN_LAST_DAY, QUALITY)))
-        for (i in 1..20) {
+        for (i in 1..21) {
             app.updateQuality()
             Assertions.assertTrue(app.items[0].quality >= 0)
         }

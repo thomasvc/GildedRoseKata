@@ -105,4 +105,13 @@ class SpecialGoodTests {
             Assertions.assertEquals(MAX_QUALITY - (i * 2), app.items[0].quality)
         }
     }
+
+    @Test
+    fun `Conjured items degrade in Quality 4 times as fast as normal items when after sellIn`() {
+        val app = GildedRose(arrayOf(Item(CONJURED, 0, MAX_QUALITY)))
+        for (i in 1..5) {
+            app.updateQuality()
+            Assertions.assertEquals(MAX_QUALITY - (i * 4), app.items[0].quality)
+        }
+    }
 }

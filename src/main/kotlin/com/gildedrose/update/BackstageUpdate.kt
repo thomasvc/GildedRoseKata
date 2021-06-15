@@ -1,7 +1,9 @@
 package com.gildedrose.update
 
+import com.gildedrose.DEFAULT_QUALITY_INCREASE
 import com.gildedrose.Item
 import com.gildedrose.MAX_QUALITY
+import com.gildedrose.MIN_QUALITY
 
 class BackstageUpdate : BaseUpdate() {
 
@@ -18,10 +20,10 @@ class BackstageUpdate : BaseUpdate() {
 
     private fun Item.updateQuality() {
         when {
-            sellIn < 0 -> quality = 0
+            sellIn < 0 -> quality = MIN_QUALITY
             sellIn < 5 -> quality += 3
             sellIn < 10 -> quality += 2
-            quality < MAX_QUALITY -> quality += 1
+            quality < MAX_QUALITY -> quality += DEFAULT_QUALITY_INCREASE
         }
     }
 }

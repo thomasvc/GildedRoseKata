@@ -1,6 +1,7 @@
 package com.gildedrose
 
-import com.gildedrose.update.*
+import com.gildedrose.update.AgeOneDay
+import com.gildedrose.update.DefaultUpdate
 
 class GildedRose(var items: Array<Item>) {
 
@@ -10,12 +11,9 @@ class GildedRose(var items: Array<Item>) {
         }
     }
 
-    private val updaters = hashMapOf<String, AgeOneDay>(
-            BRIE_NAME to BrieUpdate(),
-            SULFURAS_NAME to SulfurasUpdate(),
-            BACKSTAGE_PASS_NAME to BackstageUpdate()
-    )
-
-    private fun getUpdater(itemName: String): AgeOneDay = updaters.getOrDefault(itemName, DefaultUpdate())
+    private fun getUpdater(itemName: String): AgeOneDay {
+        return if (itemName.toLowerCase().startsWith(CONJURED_LOWERCASE)) DefaultUpdate(true)
+        else updaters.getOrDefault(itemName, DefaultUpdate())
+    }
 }
 

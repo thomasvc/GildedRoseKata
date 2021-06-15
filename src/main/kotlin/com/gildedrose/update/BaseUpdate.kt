@@ -1,5 +1,6 @@
 package com.gildedrose.update
 
+import com.gildedrose.DEFAULT_SELLIN_DECREASE
 import com.gildedrose.Item
 
 abstract class BaseUpdate : AgeOneDay {
@@ -9,6 +10,6 @@ abstract class BaseUpdate : AgeOneDay {
     }
 
     open fun Item.decreaseSellIn() {
-        sellIn -= 1
+        sellIn -= DEFAULT_SELLIN_DECREASE
     }
 }

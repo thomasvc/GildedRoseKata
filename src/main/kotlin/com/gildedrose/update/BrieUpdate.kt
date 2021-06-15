@@ -1,5 +1,6 @@
 package com.gildedrose.update
 
+import com.gildedrose.DEFAULT_QUALITY_INCREASE
 import com.gildedrose.Item
 import com.gildedrose.MAX_QUALITY
 
@@ -13,7 +14,7 @@ class BrieUpdate : BaseUpdate() {
     }
 
     private fun Item.updateQuality() {
-        val plus = if (sellIn >= 0) 1 else 2
+        val plus = if (sellIn >= 0) DEFAULT_QUALITY_INCREASE else DEFAULT_QUALITY_INCREASE * 2
         if(quality + plus >= MAX_QUALITY) quality = MAX_QUALITY
         else quality += plus
     }
