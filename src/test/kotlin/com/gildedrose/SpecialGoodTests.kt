@@ -14,9 +14,11 @@ class SpecialGoodTests {
         private const val BRIE = "Aged Brie"
         private const val SULFURAS = "Sulfuras, Hand of Ragnaros"
         private const val BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
+        private const val CONJURED = "Conjured Mana Cake"
         val agedBrie = Item(BRIE, SELL_IN, QUALITY)
         val agedBrieMaxQuality = Item(BRIE, SELL_IN, MAX_QUALITY)
         val sulfuras = Item(SULFURAS, SELL_IN, SULFURAS_QUALITY)
+        val conjured = Item(CONJURED, SELL_IN, MAX_QUALITY)
     }
 
     @Test
@@ -96,6 +98,15 @@ class SpecialGoodTests {
                 Executable { Assertions.assertEquals(sellIn - i, app.items[0].sellIn) },
                 Executable { Assertions.assertEquals(0, app.items[0].quality) }
             )
+        }
+    }
+
+    @Test
+    fun `Conjured items degrade in Quality twice as fast as normal items`() {
+        val app = GildedRose(arrayOf(conjured))
+        for (i in 1..SELL_IN) {
+            app.updateQuality()
+            Assertions.assertEquals(MAX_QUALITY - (i * 2), app.items[0].quality)
         }
     }
 }
