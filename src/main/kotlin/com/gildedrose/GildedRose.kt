@@ -1,58 +1,21 @@
 package com.gildedrose
 
+import com.gildedrose.update.*
+
 class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
-        for (i in items.indices) {
-            if (items[i].name != BRIE_NAME && items[i].name != BACKSTAGE_PASS_NAME) {
-                if (items[i].quality > MIN_QUALITY) {
-                    if (items[i].name != SULFURAS_NAME) {
-                        items[i].quality = items[i].quality - 1
-                    }
-                }
-            } else {
-                if (items[i].quality < MAX_QUALITY) {
-                    items[i].quality = items[i].quality + 1
-
-                    if (items[i].name == BACKSTAGE_PASS_NAME) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < MAX_QUALITY) {
-                                items[i].quality = items[i].quality + 1
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < MAX_QUALITY) {
-                                items[i].quality = items[i].quality + 1
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (items[i].name != SULFURAS_NAME) {
-                items[i].sellIn = items[i].sellIn - 1
-            }
-
-            if (items[i].sellIn < 0) {
-                if (items[i].name != BRIE_NAME) {
-                    if (items[i].name != BACKSTAGE_PASS_NAME) {
-                        if (items[i].quality > MIN_QUALITY) {
-                            if (items[i].name != SULFURAS_NAME) {
-                                items[i].quality = items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality
-                    }
-                } else {
-                    if (items[i].quality < MAX_QUALITY) {
-                        items[i].quality = items[i].quality + 1
-                    }
-                }
-            }
+        items.forEach {
+            getUpdater(it.name).age1Day(it)
         }
     }
 
+    private val updaters = hashMapOf<String, AgeOneDay>(
+            BRIE_NAME to BrieUpdate(),
+            SULFURAS_NAME to SulfurasUpdate(),
+            BACKSTAGE_PASS_NAME to BackstageUpdate()
+    )
+
+    private fun getUpdater(itemName: String): AgeOneDay = updaters.getOrDefault(itemName, DefaultUpdate())
 }
 

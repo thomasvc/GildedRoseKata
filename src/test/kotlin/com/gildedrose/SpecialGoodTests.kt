@@ -15,29 +15,25 @@ class SpecialGoodTests {
         private const val SULFURAS = "Sulfuras, Hand of Ragnaros"
         private const val BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
         private const val CONJURED = "Conjured Mana Cake"
-        val agedBrie = Item(BRIE, SELL_IN, QUALITY)
-        val agedBrieMaxQuality = Item(BRIE, SELL_IN, MAX_QUALITY)
-        val sulfuras = Item(SULFURAS, SELL_IN, SULFURAS_QUALITY)
-        val conjured = Item(CONJURED, SELL_IN, MAX_QUALITY)
     }
 
     @Test
     fun `Aged Brie actually increases in Quality the older it gets`() {
-        val app = GildedRose(arrayOf(agedBrie))
+        val app = GildedRose(arrayOf(Item(BRIE, SELL_IN, QUALITY)))
         app.updateQuality()
         Assertions.assertTrue(app.items[0].quality > QUALITY)
     }
 
     @Test
     fun `The Quality of an item is never more than 50`() {
-        val app = GildedRose(arrayOf(agedBrieMaxQuality))
+        val app = GildedRose(arrayOf(Item(BRIE, SELL_IN, MAX_QUALITY)))
         app.updateQuality()
         Assertions.assertEquals(MAX_QUALITY, app.items[0].quality)
     }
 
     @Test
     fun `Sulfuras, being a legendary item, never has to be sold or decreases in Quality`() {
-        val app = GildedRose(arrayOf(sulfuras))
+        val app = GildedRose(arrayOf(Item(SULFURAS, SELL_IN, SULFURAS_QUALITY)))
         app.updateQuality()
         Assertions.assertAll(
             Executable { Assertions.assertEquals(SELL_IN, app.items[0].sellIn) },
@@ -103,7 +99,7 @@ class SpecialGoodTests {
 
     @Test
     fun `Conjured items degrade in Quality twice as fast as normal items`() {
-        val app = GildedRose(arrayOf(conjured))
+        val app = GildedRose(arrayOf(Item(CONJURED, SELL_IN, MAX_QUALITY)))
         for (i in 1..SELL_IN) {
             app.updateQuality()
             Assertions.assertEquals(MAX_QUALITY - (i * 2), app.items[0].quality)
