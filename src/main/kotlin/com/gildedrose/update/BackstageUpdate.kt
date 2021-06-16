@@ -13,8 +13,8 @@ class BackstageUpdate : BaseUpdate() {
         Quality drops to 0 after the concert
      */
 
-    override fun age1Day(item: Item) {
-        super.age1Day(item)
+    override fun update1Day(item: Item) {
+        super.update1Day(item)
         item.updateQuality()
     }
 

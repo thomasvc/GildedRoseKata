@@ -6,8 +6,8 @@ import com.gildedrose.MIN_QUALITY
 
 class DefaultUpdate(private val conjured: Boolean = false) : BaseUpdate() {
 
-    override fun age1Day(item: Item) {
-        super.age1Day(item)
+    override fun update1Day(item: Item) {
+        super.update1Day(item)
         item.updateQuality()
     }
 

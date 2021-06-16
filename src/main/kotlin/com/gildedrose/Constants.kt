@@ -1,6 +1,6 @@
 package com.gildedrose
 
-import com.gildedrose.update.AgeOneDay
+import com.gildedrose.update.UpdateOneDay
 import com.gildedrose.update.BackstageUpdate
 import com.gildedrose.update.BrieUpdate
 import com.gildedrose.update.SulfurasUpdate
@@ -20,7 +20,7 @@ const val SULFURAS_NAME = "Sulfuras, Hand of Ragnaros"
 
 const val CONJURED_LOWERCASE = "conjured"
 
-val updaters = hashMapOf<String, AgeOneDay>(
+val updaters = hashMapOf<String, UpdateOneDay>(
     BRIE_NAME to BrieUpdate(),
     SULFURAS_NAME to SulfurasUpdate(),
     BACKSTAGE_PASS_NAME to BackstageUpdate()

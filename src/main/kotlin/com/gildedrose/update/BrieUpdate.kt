@@ -8,8 +8,8 @@ class BrieUpdate : BaseUpdate() {
 
     /** "Aged Brie" actually increases in Quality the older it gets */
 
-    override fun age1Day(item: Item) {
-        super.age1Day(item)
+    override fun update1Day(item: Item) {
+        super.update1Day(item)
         item.updateQuality()
     }
 

@@ -3,9 +3,9 @@ package com.gildedrose.update
 import com.gildedrose.DEFAULT_SELLIN_DECREASE
 import com.gildedrose.Item
 
-abstract class BaseUpdate : AgeOneDay {
+abstract class BaseUpdate : UpdateOneDay {
 
-    override fun age1Day(item: Item) {
+    override fun update1Day(item: Item) {
         item.decreaseSellIn()
     }
 
